@@ -1,0 +1,244 @@
+<!-- ...existing code... -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Form Data Diri</title>
+    <style>
+        :root{
+            --bg: #8FABD4;
+            --card: #4A70A9;
+            --card-2: #3d5f8b;
+            --accent: #ffd166;
+            --text: #fff;
+            --muted: rgba(255,255,255,0.85);
+            --radius: 10px;
+            --gap: 14px;
+            font-family: "Helvetica", Arial, sans-serif;
+        }
+
+        *{box-sizing:border-box;margin:0;padding:0}
+
+        body{
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:linear-gradient(180deg,var(--bg), #6f98c8);
+            padding:32px;
+            color:var(--text);
+        }
+
+        .container{
+            width:100%;
+            max-width:760px;
+            background:linear-gradient(180deg,var(--card), var(--card-2));
+            border-radius:var(--radius);
+            padding:28px;
+            box-shadow:0 8px 30px rgba(0,0,0,0.25);
+        }
+
+        header.form-head{
+            text-align:center;
+            margin-bottom:18px;
+        }
+        header.form-head h1{
+            font-size:20px;
+            letter-spacing:0.6px;
+        }
+        header.form-head p{
+            margin-top:6px;
+            color:var(--muted);
+            font-size:13px;
+        }
+
+        form{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:var(--gap);
+            align-items:start;
+        }
+
+        .full{
+            grid-column:1 / -1;
+        }
+
+        label{
+            display:block;
+            font-weight:600;
+            font-size:13px;
+            margin-bottom:6px;
+            color:var(--text);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        select{
+            width:100%;
+            padding:10px 12px;
+            border-radius:8px;
+            border:1px solid rgba(255,255,255,0.12);
+            background:rgba(255,255,255,0.04);
+            color:var(--text);
+            outline:none;
+            transition:box-shadow .15s, border-color .15s;
+        }
+        input:focus, select:focus{
+            box-shadow:0 0 0 4px rgba(255,209,102,0.08);
+            border-color:var(--accent);
+        }
+
+        .field{
+            display:flex;
+            flex-direction:column;
+            gap:8px;
+        }
+
+        /* Radio / Checkbox groups */
+        fieldset{
+            border:0;
+            padding:0;
+            margin:0;
+            color:var(--text);
+        }
+        .group{
+            display:flex;
+            gap:12px;
+            flex-wrap:wrap;
+            align-items:center;
+        }
+        .option{
+            display:flex;
+            align-items:center;
+            gap:8px;
+            background:rgba(255,255,255,0.03);
+            padding:6px 10px;
+            border-radius:8px;
+            border:1px solid rgba(255,255,255,0.04);
+            font-size:14px;
+        }
+        input[type="radio"], input[type="checkbox"]{
+            width:16px;
+            height:16px;
+            accent-color: #ffd166;
+            cursor:pointer;
+        }
+
+        .actions{
+            display:flex;
+            justify-content:flex-end;
+            gap:12px;
+            margin-top:6px;
+        }
+
+        .btn{
+            padding:10px 16px;
+            border-radius:8px;
+            border:0;
+            cursor:pointer;
+            font-weight:700;
+        }
+        .btn-primary{
+            background:var(--accent);
+            color:#333;
+        }
+        .btn-reset{
+            background:transparent;
+            color:var(--text);
+            border:1px solid rgba(255,255,255,0.12);
+        }
+
+        /* Responsive */
+        @media (max-width:640px){
+            form{grid-template-columns:1fr}
+            .actions{justify-content:stretch; flex-direction:column-reverse}
+        }
+
+        small.hint{display:block;color:var(--muted);font-size:12px;margin-top:6px}
+    </style>
+</head>
+<body>
+    <section class="container" aria-labelledby="form-title">
+        <header class="form-head">
+            <h1 id="form-title">Form Isi Data Diri</h1>
+            <p>Isi data dengan benar. Kolom wajib ditandai dengan (*)</p>
+        </header>
+
+        <form autocomplete="on" novalidate>
+            <div class="field">
+                <label for="nim">NIM *</label>
+                <input id="nim" name="NIM" type="text" placeholder="Masukkan NIM" required>
+            </div>
+
+            <div class="field">
+                <label for="nama">Nama *</label>
+                <input id="nama" name="Nama" type="text" placeholder="Nama lengkap" required>
+            </div>
+
+            <fieldset class="full" aria-labelledby="jk-label">
+                <label id="jk-label">Jenis Kelamin *</label>
+                <div class="group">
+                    <label class="option" for="jk_laki">
+                        <input id="jk_laki" type="radio" name="JenisKelamin" value="Laki - Laki" required>
+                        Laki - Laki
+                    </label>
+                    <label class="option" for="jk_perempuan">
+                        <input id="jk_perempuan" type="radio" name="JenisKelamin" value="Perempuan">
+                        Perempuan
+                    </label>
+                </div>
+            </fieldset>
+
+            <div class="field">
+                <label for="tglLahir">Tanggal Lahir</label>
+                <input id="tglLahir" name="TanggalLahir" type="date">
+            </div>
+
+            <div class="field">
+                <label for="kota">Kota Lahir</label>
+                <select id="kota" name="KotaLahir">
+                    <option value="">-- Pilih Kota --</option>
+                    <option value="Buleleng">Buleleng</option>
+                    <option value="Tabanan">Tabanan</option>
+                    <option value="Denpasar">Denpasar</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="alamat">Alamat Tempat Tinggal</label>
+                <input id="alamat" name="Alamat" type="text" placeholder="Jalan, RT/RW, Desa/Kelurahan">
+            </div>
+
+            <div class="field">
+                <label for="wa">No. Whatsapp</label>
+                <input id="wa" name="NomerWa" type="text" placeholder="08xx....">
+                <small class="hint">Masukkan tanpa spasi, contoh: 081234567890</small>
+            </div>
+
+            <div class="full field">
+                <label for="email">Email</label>
+                <input id="email" name="Email" type="email" placeholder="email@contoh.com">
+            </div>
+
+            <fieldset class="full">
+                <label>Hobi</label>
+                <div class="group">
+                    <label class="option" for="hobi1"><input id="hobi1" type="checkbox" name="hobi" value="membaca">Membaca</label>
+                    <label class="option" for="hobi2"><input id="hobi2" type="checkbox" name="hobi" value="olahraga">Olahraga</label>
+                    <label class="option" for="hobi3"><input id="hobi3" type="checkbox" name="hobi" value="memasak">Memasak</label>
+                    <label class="option" for="hobi4"><input id="hobi4" type="checkbox" name="hobi" value="musik">Mendengarkan Musik</label>
+                    <label class="option" for="hobi5"><input id="hobi5" type="checkbox" name="hobi" value="traveling">Traveling</label>
+                </div>
+            </fieldset>
+
+            <div class="full actions">
+                <button type="reset" class="btn btn-reset">Reset</button>
+                <button type="submit" class="btn btn-primary">Kirim</button>
+            </div>
+        </form>
+    </section>
+</body>
+</html>
+<!-- ...existing code... -->
